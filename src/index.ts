@@ -9,12 +9,9 @@ import {
   FloatValueNode,
   StringValueNode,
   BooleanValueNode,
+  TypeNode,
 } from 'graphql'
-import {
-  extractType,
-  isListTypeNode,
-  isNonNullTypeNode,
-} from '@graphql-toolkit/schema-merging'
+import { extractType } from '@graphql-toolkit/schema-merging'
 import { render } from 'mustache'
 
 /**
@@ -37,7 +34,7 @@ generator photon {
 {{#models}}
 model {{name}} {
   {{#fields}}
-  {{name}} {{type}}{{#optional}}?{{/optional}}{{#list}}[]{{/list}} {{#id}}@id @default(cuid()){{/id}} {{#unique}}@unique{{/unique}} {{#createdAt}}@default(now()){{/createdAt}} {{#updatedAt}}@updatedAt{{/updatedAt}} {{#default}}@default({{value}}){{/default}} {{#relation}}@relation(name: "{{name}}"){{/relation}}
+  {{name}} {{type}}{{#optional}}?{{/optional}}{{#list}}[]{{/list}} {{#id}}@id @default(cuid()){{/id}} {{#unique}}@unique{{/unique}} {{#createdAt}}@default(now()){{/createdAt}} {{#updatedAt}}@updatedAt{{/updatedAt}} {{#default}}@default("{{value}}"){{/default}} {{#relation}}@relation(name: "{{name}}"){{/relation}}
   {{/fields}}
 }
 
@@ -136,7 +133,8 @@ function convertField(definition: FieldDefinitionNode): Field {
     name: definition.name.value,
     type: convertType(field.name.value),
     /* Modifications */
-    optional: !isNonNullTypeNode(definition.type),
+    optional:
+      !isNonNullTypeNode(definition.type) && !isListTypeNode(definition.type),
     list: isListTypeNode(definition.type),
     /* Directives */
     id: includeDirective(definition.directives, 'id'),
@@ -146,6 +144,42 @@ function convertField(definition: FieldDefinitionNode): Field {
     updatedAt: includeDirective(definition.directives, 'updatedAt'),
     default: directives?.default as Field['default'],
     relation: directives?.relation as Field['relation'],
+  }
+}
+
+/**
+ * Determines whether a field is a list.
+ * @param definition
+ */
+function isListTypeNode(definition: TypeNode): boolean {
+  switch (definition.kind) {
+    case 'ListType': {
+      return true
+    }
+    case 'NonNullType': {
+      return isListTypeNode(definition.type)
+    }
+    case 'NamedType': {
+      return false
+    }
+  }
+}
+
+/**
+ * Determines whether a definition is a non-nullable type.
+ * @param definition
+ */
+function isNonNullTypeNode(definition: TypeNode): boolean {
+  switch (definition.kind) {
+    case 'ListType': {
+      return false
+    }
+    case 'NonNullType': {
+      return true
+    }
+    case 'NamedType': {
+      return false
+    }
   }
 }
 

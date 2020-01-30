@@ -18,7 +18,7 @@ model User {
   email String  @unique    
   gender Gender?      
   name String?      
-  posts Post      @relation(name: \\"UserPosts\\")
+  posts Post[]      @relation(name: \\"UserPosts\\")
   subscribe Boolean?      
 }
 
@@ -26,7 +26,7 @@ model Post {
   id String @id @default(cuid())     
   createdAt DateTime   @default(now())   
   updatedAt DateTime    @updatedAt  
-  published Boolean     @default(false) 
+  published Boolean     @default(\\"false\\") 
   title String      
   content String?      
   author User      
