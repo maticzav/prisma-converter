@@ -8,6 +8,9 @@
     "release": "semantic-release",
     "test": "jest"
   },
+  "files": [
+    "dist"
+  ],
   "license": "MIT",
   "dependencies": {
     "@graphql-toolkit/schema-merging": "^0.9.7",
