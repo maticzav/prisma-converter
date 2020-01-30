@@ -2,6 +2,7 @@
   "name": "prisma-converter",
   "version": "1.0.0",
   "main": "dist/index.js",
+  "bin": "dist/bin.js",
   "scripts": {
     "build": "tsc",
     "coverage": "codecov",
