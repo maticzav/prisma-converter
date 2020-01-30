@@ -4,8 +4,8 @@
 
 ## Usage
 
-```bash
-npx prisma-convert <datamodel.graphql>
+```sh
+npx prisma-converter <datamodel.graphql>
 ```
 
 It turns your legacy datamodel specification into an upcoming Prisma 2 data model.
