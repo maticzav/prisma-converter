@@ -1,0 +1,36 @@
+{
+  "name": "prisma-converter",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "coverage": "codecov",
+    "release": "semantic-release",
+    "test": "jest"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@graphql-toolkit/schema-merging": "^0.9.7",
+    "graphql": "^14.6.0",
+    "meow": "^6.0.0",
+    "multilines": "^1.0.3",
+    "mustache": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/graphql": "^14.5.0",
+    "@types/jest": "^25.1.1",
+    "@types/mustache": "^4.0.0",
+    "@types/node": "^13.5.2",
+    "codecov": "^3.6.2",
+    "husky": "^4.2.1",
+    "jest": "^25.1.0",
+    "prettier": "^1.19.1",
+    "pretty-quick": "^2.0.1",
+    "ts-jest": "^25.1.0",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.7.5"
+  },
+  "release": {
+    "branch": "master"
+  }
+}

@@ -1,0 +1,25 @@
+type User {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  email: String! @unique
+  gender: Gender
+  name: String
+  posts: [Post!]! @relation(name: "UserPosts")
+  subscribe: Boolean @deault(value: false)
+}
+
+type Post {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  published: Boolean! @default(value: false)
+  title: String!
+  content: String
+  author: User!
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}

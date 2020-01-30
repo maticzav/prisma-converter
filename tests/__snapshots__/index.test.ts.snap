@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`converter correctly converts the file 1`] = `
+"
+datasource pg {
+  provider = \\"postgres\\"
+  url = env(\\"POSTGRESQL_URL\\")
+}
+
+generator photon {
+  provider = \\"prisma-client-js\\"
+}
+
+model User {
+  id String @id @default(cuid())     
+  createdAt DateTime   @default(now())   
+  updatedAt DateTime    @updatedAt  
+  email String  @unique    
+  gender Gender?      
+  name String?      
+  posts Post      @relation(name: \\"UserPosts\\")
+  subscribe Boolean?      
+}
+
+model Post {
+  id String @id @default(cuid())     
+  createdAt DateTime   @default(now())   
+  updatedAt DateTime    @updatedAt  
+  published Boolean     @default(false) 
+  title String      
+  content String?      
+  author User      
+}
+
+
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+"
+`;
