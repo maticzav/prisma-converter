@@ -26,7 +26,7 @@
     "@types/mustache": "4.1.1",
     "@types/node": "13.13.47",
     "codecov": "3.8.1",
-    "husky": "4.3.8",
+    "husky": "5.2.0",
     "jest": "25.5.4",
     "prettier": "1.19.1",
     "pretty-quick": "2.0.2",
