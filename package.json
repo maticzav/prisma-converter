@@ -14,7 +14,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@graphql-toolkit/schema-merging": "^0.10.0",
+    "@graphql-toolkit/schema-merging": "^0.10.1",
     "graphql": "^14.6.0",
     "meow": "^6.0.0",
     "multilines": "^1.0.3",
